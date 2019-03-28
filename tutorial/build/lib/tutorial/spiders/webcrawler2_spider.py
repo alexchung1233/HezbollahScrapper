@@ -10,20 +10,15 @@ from tutorial.items import TutorialItem
 import csv
 
 
-def find_all_substrings(string, sub):
-    #list comprehension using regex doing what??
-    #re.escape matches patterns that may have regular expression metacharacters
-    #pattern = r'((\b{domain}\b)(?!.*\2).*\bHezbollah\b)|((\bhezbollah\b)(?!.*\4).*\b{domain}\b)'.format(domain = sub)
-    #change it so it only goes from beginning of text to keyword#
-    pattern = r'(\b{domain}\b.*\bHezbollah\b)|(\bHezbollah\b.*\b{domain}\b)'.format(domain = sub)
-    return re.search(pattern,string)
+class GenericSpider2(CrawlSpider):
 
-class GenericSpider(CrawlSpider):
+    name = "webcrawler2"
+    #allowed_domains =[url[0][8:] for url in csv.reader(open('/home/chrx/Desktop/Scrapy/HezbollahScraper/urls.csv','r'),delimiter =',')]
+    allowed_domains = ["www.dailystar.com.lb"]
 
-    name = "webcrawler"
-    #allowed_domains =[url[0][8:] for url in csv.reader(open('C:/Users/Alex/Desktop/HezbollahScrapper-master/urls.csv','r'),delimiter =',')]
-    allowed_domains = ["www.dailystar.com.lb","www.counterextremism.com","www.bbc.com"]
-    #,"www.aljazeera.com","www.nytimes.com","www.theatlantic.com","www.thenational.ae/world","www.washingtonpost.com/world","www.bbc.com/news","www.presstv.com"]
+    #start_urls = [url[0] for url in csv.reader(open('/home/chrx/Desktop/Scrapy/HezbollahScraper/urls.csv','r'),delimiter =',')]
+    start_urls = ["http://www.dailystar.com.lb"]
+
     #start_urls = ["https://www.aljazeera.com/topics/organisations/hezbollah.html","https://www.nytimes.com/topic/organization/hezbollah"
     #            ,"https://www.theatlantic.com/international/archive/2018/05/lebanon-election-hezbollah-sunni-shia/559772/"
     #            ,"https://www.thenational.ae/world/mena/us-warns-of-growing-hezbollah-influence-as-lebanon-nears-agreement-on-new-government-1.804342",
@@ -31,8 +26,6 @@ class GenericSpider(CrawlSpider):
     #            "https://www.counterextremism.com",
     #            "https://www.bbc.com/news/world-middle-east-10814698",
     #            "https://www.presstv.com/Detail/2018/12/19/583358/Lebanon-US-Israel-Hezbollah-influence-political-system-war"]
-    #start_urls = [url[0] for url in csv.reader(open('C:/Users/Alex/Desktop/HezbollahScrapper-master/urls.csv','r'),delimiter =',')]
-    start_urls = ["http://www.dailystar.com.lb","http://www.counterextremism.com","https://www.aljazeera.com"]
 
     #possibly use process_links to to filter out links that dont mention hezbollah
     rules = [Rule(LinkExtractor(unique = True), follow=True, callback="check_buzzwords")]
@@ -41,7 +34,8 @@ class GenericSpider(CrawlSpider):
     locations = []
     organizations = []
     wordlist = []
-    with open('C:/Users/Alex/Desktop/HezbollahScrapper-master/terms.csv','r') as csvfile:
+
+    with open('/home/chrx/Desktop/Scrapy/HezbollahScraper/terms.csv','r') as csvfile:
         terms_reader = csv.reader(csvfile,delimiter = ',')
         for row in terms_reader:
             terms.append(row[0])
@@ -53,9 +47,7 @@ class GenericSpider(CrawlSpider):
 
     def __init__(self, category=None, *args, **kwargs):
         self.rules = [Rule(LinkExtractor(unique = True), follow=True, callback="check_words")]
-        super(GenericSpider, self).__init__(*args, **kwargs)
-
-
+        super(GenericSpider2, self).__init__(*args, **kwargs)
 
 
 
@@ -82,13 +74,7 @@ class GenericSpider(CrawlSpider):
                     #    item["sentence"] = found.group(0)
 
         return(items)
-    def parse_item(self, response):
-        print('!!!!!!!!!!!!! Parsing: %s !!!!!!!!!!!!!' % response.url)
 
-        # Check the Content-Type.
-        if is_content_type_ok(response.headers.getlist('Content-Type')):
-            # Yield data here
-            yield {}
 
 
     #gets the requests to follow recursively
