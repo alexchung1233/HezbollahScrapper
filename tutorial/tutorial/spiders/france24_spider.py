@@ -9,16 +9,15 @@ from scrapy.item import Item
 from tutorial.items import TutorialItem
 import csv
 
-class AljazeeraSpider(CrawlSpider):
 
-    name = "aljazeeracrawler"
+class France24Spider(CrawlSpider):
+
+    name = "france24crawler"
     #allowed_domains =[url[0][8:] for url in csv.reader(open('/home/chrx/Desktop/Scrapy/HezbollahScraper/urls.csv','r'),delimiter =',')]
-    allowed_domains = ["www.aljazeera.com"]
+    allowed_domains = ["www.france24.com/en/"]
 
     #start_urls = [url[0] for url in csv.reader(open('/home/chrx/Desktop/Scrapy/HezbollahScraper/urls.csv','r'),delimiter =',')]
-    start_urls = ["https://www.aljazeera.com"]
-
-
+    start_urls = ["https://www.france24.com/en/"]
 
     #start_urls = ["https://www.aljazeera.com/topics/organisations/hezbollah.html","https://www.nytimes.com/topic/organization/hezbollah"
     #            ,"https://www.theatlantic.com/international/archive/2018/05/lebanon-election-hezbollah-sunni-shia/559772/"
@@ -27,8 +26,8 @@ class AljazeeraSpider(CrawlSpider):
     #            "https://www.counterextremism.com",
     #            "https://www.bbc.com/news/world-middle-east-10814698",
     #            "https://www.presstv.com/Detail/2018/12/19/583358/Lebanon-US-Israel-Hezbollah-influence-political-system-war"]
-    #possibly use process_links to to filter out links that dont mention hezbollah
 
+    #possibly use process_links to to filter out links that dont mention hezbollah
     rules = [Rule(LinkExtractor(unique = True), follow=True, callback="check_buzzwords")]
 
     terms = []
@@ -44,7 +43,6 @@ class AljazeeraSpider(CrawlSpider):
     for term in terms:
         for indx in range(0,5):
             wordlist.append(tuple((term,organizations[indx])))
-
 
 
 
@@ -68,6 +66,7 @@ class AljazeeraSpider(CrawlSpider):
                     item["url"] = url
                     item["sentence"] = p_text
                     items.append(item)
+
 
         return(items)
 
