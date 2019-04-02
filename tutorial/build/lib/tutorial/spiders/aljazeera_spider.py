@@ -9,15 +9,16 @@ from scrapy.item import Item
 from tutorial.items import TutorialItem
 import csv
 
+class AljazeeraSpider(CrawlSpider):
 
-class GenericSpider2(CrawlSpider):
-
-    name = "webcrawler2"
+    name = "aljazeeracrawler"
     #allowed_domains =[url[0][8:] for url in csv.reader(open('/home/chrx/Desktop/Scrapy/HezbollahScraper/urls.csv','r'),delimiter =',')]
-    allowed_domains = ["www.dailystar.com.lb"]
+    allowed_domains = ["www.counterextremism.com"]
 
     #start_urls = [url[0] for url in csv.reader(open('/home/chrx/Desktop/Scrapy/HezbollahScraper/urls.csv','r'),delimiter =',')]
-    start_urls = ["http://www.dailystar.com.lb"]
+    start_urls = ["https://www.counterextremism.com"]
+
+
 
     #start_urls = ["https://www.aljazeera.com/topics/organisations/hezbollah.html","https://www.nytimes.com/topic/organization/hezbollah"
     #            ,"https://www.theatlantic.com/international/archive/2018/05/lebanon-election-hezbollah-sunni-shia/559772/"
@@ -26,8 +27,8 @@ class GenericSpider2(CrawlSpider):
     #            "https://www.counterextremism.com",
     #            "https://www.bbc.com/news/world-middle-east-10814698",
     #            "https://www.presstv.com/Detail/2018/12/19/583358/Lebanon-US-Israel-Hezbollah-influence-political-system-war"]
-
     #possibly use process_links to to filter out links that dont mention hezbollah
+
     rules = [Rule(LinkExtractor(unique = True), follow=True, callback="check_buzzwords")]
 
     terms = []
@@ -45,14 +46,12 @@ class GenericSpider2(CrawlSpider):
             wordlist.append(tuple((term,organizations[indx])))
 
 
-    def __init__(self, category=None, *args, **kwargs):
-        self.rules = [Rule(LinkExtractor(unique = True), follow=True, callback="check_words")]
-        super(GenericSpider2, self).__init__(*args, **kwargs)
 
 
 
 
-    def check_words(self, response):
+
+    def check_buzzwords(self, response):
         url = response.url
         contenttype = response.headers.get("content-type", "").decode('utf-8').lower()
         items = []
@@ -69,9 +68,6 @@ class GenericSpider2(CrawlSpider):
                     item["url"] = url
                     item["sentence"] = p_text
                     items.append(item)
-                #found = find_all_substrings(p_text, word)
-                    #if(found != None):
-                    #    item["sentence"] = found.group(0)
 
         return(items)
 

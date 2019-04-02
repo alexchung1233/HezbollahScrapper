@@ -45,14 +45,11 @@ class DailystarSpider(CrawlSpider):
             wordlist.append(tuple((term,organizations[indx])))
 
 
-    def __init__(self, category=None, *args, **kwargs):
-        self.rules = [Rule(LinkExtractor(unique = True), follow=True, callback="check_words")]
-        super(GenericSpider, self).__init__(*args, **kwargs)
 
 
 
 
-    def check_words(self, response):
+    def check_buzzwords(self, response):
         url = response.url
         contenttype = response.headers.get("content-type", "").decode('utf-8').lower()
         items = []

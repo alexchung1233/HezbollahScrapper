@@ -12,5 +12,6 @@ tutorial/settings.py
 tutorial/commands/__init__.py
 tutorial/commands/allcrawl.py
 tutorial/spiders/__init__.py
-tutorial/spiders/webcrawler2_spider.py
-tutorial/spiders/webcrawler_spider.py
+tutorial/spiders/aljazeera_spider.py
+tutorial/spiders/annahar_spider.py
+tutorial/spiders/dailystar_spider.py

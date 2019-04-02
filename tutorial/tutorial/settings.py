@@ -104,7 +104,6 @@ RETRY_ENABLED = False
 #SCHEDULER_PRIORITY_QUEUE = 'queues.RoundRobinPriorityQueue'
 #SCHEDULER_DISK_QUEUE = 'queues.DiskQueue'
 #SCHEDULER = 'domain_scheduler.DomainScheduler'
-
+FEED_FORMAT="CSV"
+FEED_URI="sample_output.csv"
 COMMANDS_MODULE = 'tutorial.commands'
-FEED_FORMAT="csv"
-FEED_URI="output.csv"
