@@ -36,15 +36,18 @@ class AljazeeraSpider(CrawlSpider):
     organizations = []
     wordlist = []
 
-    with open('/home/chrx/Desktop/Scrapy/HezbollahScraper/terms.csv','r') as csvfile:
+    with open('C:/Users/Alex/Desktop/HezbollahScrapper/terms_english.csv','r') as csvfile:
         terms_reader = csv.reader(csvfile,delimiter = ',')
         for row in terms_reader:
             terms.append(row[0])
-            organizations.append(row[1])
-    for term in terms:
-        for indx in range(0,5):
-            wordlist.append(tuple((term,organizations[indx])))
 
+    with open('C:/Users/Alex/Desktop/HezbollahScrapper/organizations_english.csv','r') as csvfile:
+        terms_reader = csv.reader(csvfile,delimiter = ',')
+        for row in terms_reader:
+            organizations.append(row[0])
+    for term in terms:
+        for organization in organizations:
+            wordlist.append(tuple((term,organization)))
 
 
 

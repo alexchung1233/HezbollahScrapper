@@ -9,17 +9,15 @@ from scrapy.item import Item
 from tutorial.items import TutorialItem
 import csv
 
+class WashingtonInstituteSpider(CrawlSpider):
 
-class AnneharSpider(CrawlSpider):
-
-    name = "anneharcrawler"
+    name = "washingtoninstitutecrawler"
     #allowed_domains =[url[0][8:] for url in csv.reader(open('/home/chrx/Desktop/Scrapy/HezbollahScraper/urls.csv','r'),delimiter =',')]
-    allowed_domains = ["en.annahar.com"]
+    allowed_domains = ["www.washingtoninstitute.org"]
 
     #start_urls = [url[0] for url in csv.reader(open('/home/chrx/Desktop/Scrapy/HezbollahScraper/urls.csv','r'),delimiter =',')]
-    start_urls = ["https://en.annahar.com"]
+    start_urls = ["https://www.washingtoninstitute.org"]
 
-    #possibly use process_links to to filter out links that dont mention hezbollah
     rules = [Rule(LinkExtractor(unique = True), follow=True, callback="check_buzzwords")]
 
     terms = []
@@ -62,7 +60,6 @@ class AnneharSpider(CrawlSpider):
                     item["url"] = url
                     item["sentence"] = p_text
                     items.append(item)
-
 
         return(items)
 

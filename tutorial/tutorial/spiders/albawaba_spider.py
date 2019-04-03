@@ -13,10 +13,10 @@ class AlbawabaSpider(CrawlSpider):
 
     name = "albawabacrawler"
     #allowed_domains =[url[0][8:] for url in csv.reader(open('/home/chrx/Desktop/Scrapy/HezbollahScraper/urls.csv','r'),delimiter =',')]
-    allowed_domains = ["www.albawaba.com/en/"]
+    allowed_domains = ["https://www.albawaba.com/en"]
 
     #start_urls = [url[0] for url in csv.reader(open('/home/chrx/Desktop/Scrapy/HezbollahScraper/urls.csv','r'),delimiter =',')]
-    start_urls = ["https://www.albawaba.com/en/""]
+    start_urls = ["https://www.albawaba.com/en/"]
 
     rules = [Rule(LinkExtractor(unique = True), follow=True, callback="check_buzzwords")]
 
@@ -25,15 +25,18 @@ class AlbawabaSpider(CrawlSpider):
     organizations = []
     wordlist = []
 
-    with open('/home/chrx/Desktop/Scrapy/HezbollahScraper/terms.csv','r') as csvfile:
+    with open('C:/Users/Alex/Desktop/HezbollahScrapper/terms_english.csv','r') as csvfile:
         terms_reader = csv.reader(csvfile,delimiter = ',')
         for row in terms_reader:
             terms.append(row[0])
-            organizations.append(row[1])
-    for term in terms:
-        for indx in range(0,5):
-            wordlist.append(tuple((term,organizations[indx])))
 
+    with open('C:/Users/Alex/Desktop/HezbollahScrapper/organizations_english.csv','r') as csvfile:
+        terms_reader = csv.reader(csvfile,delimiter = ',')
+        for row in terms_reader:
+            organizations.append(row[0])
+    for term in terms:
+        for organization in organizations:
+            wordlist.append(tuple((term,organization)))
 
 
 

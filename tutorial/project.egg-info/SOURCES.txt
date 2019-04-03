@@ -12,6 +12,12 @@ tutorial/settings.py
 tutorial/commands/__init__.py
 tutorial/commands/allcrawl.py
 tutorial/spiders/__init__.py
+tutorial/spiders/alarabiya_spider.py
+tutorial/spiders/albawaba_spider.py
 tutorial/spiders/aljazeera_spider.py
 tutorial/spiders/annahar_spider.py
+tutorial/spiders/atlantic_spider.py
+tutorial/spiders/counterextremism_spider.py
 tutorial/spiders/dailystar_spider.py
+tutorial/spiders/france24_spider.py
+tutorial/spiders/washington_spider.py
