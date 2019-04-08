@@ -16,8 +16,13 @@ class AlbawabaSpider(CrawlSpider):
     allowed_domains = ["www.albawaba.com"]
 
     #start_urls = [url[0] for url in csv.reader(open('/home/chrx/Desktop/Scrapy/HezbollahScraper/urls.csv','r'),delimiter =',')]
-    start_urls = ["https://www.albawaba.com/en"]
-
+    start_urls = ["https://www.albawaba.com"]
+    custom_settings = {
+        'CONCURRENT_REQUESTS_PER_DOMAIN':5,
+        'AUTOTHROTTLE_ENABLED':True,
+        'AUTOTHROTTLE_START_DELAY':1,
+        'AUTOTHROTTLE_MAX_DELAY':3
+    }
     rules = [Rule(LinkExtractor(unique = True), follow=True, callback="check_buzzwords")]
 
     terms = []

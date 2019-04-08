@@ -14,18 +14,11 @@ class AlarabiyaSpider(CrawlSpider):
 
     name = "alarabiyacrawler"
     #allowed_domains =[url[0][8:] for url in csv.reader(open('/home/chrx/Desktop/Scrapy/HezbollahScraper/urls.csv','r'),delimiter =',')]
-    allowed_domains = ["www.english.alarabiya.net"]
+    allowed_domains = ["www.alarabiya.net"]
 
     #start_urls = [url[0] for url in csv.reader(open('/home/chrx/Desktop/Scrapy/HezbollahScraper/urls.csv','r'),delimiter =',')]
-    start_urls = ["https://www.english.alarabiya.net"]
+    start_urls = ["https://www.alarabiya.net"]
 
-    #start_urls = ["https://www.aljazeera.com/topics/organisations/hezbollah.html","https://www.nytimes.com/topic/organization/hezbollah"
-    #            ,"https://www.theatlantic.com/international/archive/2018/05/lebanon-election-hezbollah-sunni-shia/559772/"
-    #            ,"https://www.thenational.ae/world/mena/us-warns-of-growing-hezbollah-influence-as-lebanon-nears-agreement-on-new-government-1.804342",
-    #            "https://www.washingtonpost.com/world/middle_east/hezbollah-on-the-rise-in-lebanon-fends-off-saudi-arabia/2017/11/23/d9d92b1c-c961-11e7-b506-8a10ed11ecf5_story.html?noredirect=on&utm_term=.f147561e9014",
-    #            "https://www.counterextremism.com",
-    #            "https://www.bbc.com/news/world-middle-east-10814698",
-    #            "https://www.presstv.com/Detail/2018/12/19/583358/Lebanon-US-Israel-Hezbollah-influence-political-system-war"]
 
     #possibly use process_links to to filter out links that dont mention hezbollah
     rules = [Rule(LinkExtractor(unique = True), follow=True, callback="check_buzzwords")]
@@ -35,12 +28,12 @@ class AlarabiyaSpider(CrawlSpider):
     organizations = []
     wordlist = []
 
-    with open('C:/Users/Alex/Desktop/HezbollahScrapper/terms_english.csv','r') as csvfile:
+    with open('C:/Users/Alex/Desktop/HezbollahScrapper/terms_arabic.csv','r',encoding='utf-8') as csvfile:
         terms_reader = csv.reader(csvfile,delimiter = ',')
         for row in terms_reader:
             terms.append(row[0])
 
-    with open('C:/Users/Alex/Desktop/HezbollahScrapper/organizations_english.csv','r') as csvfile:
+    with open('C:/Users/Alex/Desktop/HezbollahScrapper/organizations_arabic.csv','r',encoding='utf-8') as csvfile:
         terms_reader = csv.reader(csvfile,delimiter = ',')
         for row in terms_reader:
             organizations.append(row[0])

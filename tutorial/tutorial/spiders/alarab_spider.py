@@ -14,7 +14,7 @@ class AlarabSpider(CrawlSpider):
 
     name = "alarabcrawler"
     #allowed_domains =[url[0][8:] for url in csv.reader(open('/home/chrx/Desktop/Scrapy/HezbollahScraper/urls.csv','r'),delimiter =',')]
-    allowed_domains = ["www.alarab.com "]
+    allowed_domains = ["www.alarab.com"]
 
     #start_urls = [url[0] for url in csv.reader(open('/home/chrx/Desktop/Scrapy/HezbollahScraper/urls.csv','r'),delimiter =',')]
     start_urls = ["https://www.alarab.com"]
@@ -27,12 +27,12 @@ class AlarabSpider(CrawlSpider):
     organizations = []
     wordlist = []
 
-    with open('C:/Users/Alex/Desktop/HezbollahScrapper/terms_arabic.csv','r') as csvfile:
+    with open('C:/Users/Alex/Desktop/HezbollahScrapper/terms_arabic.csv','r',encoding='utf-8') as csvfile:
         terms_reader = csv.reader(csvfile,delimiter = ',')
         for row in terms_reader:
             terms.append(row[0])
 
-    with open('C:/Users/Alex/Desktop/HezbollahScrapper/organizations_arabic.csv','r') as csvfile:
+    with open('C:/Users/Alex/Desktop/HezbollahScrapper/organizations_arabic.csv','r',encoding='utf-8') as csvfile:
         terms_reader = csv.reader(csvfile,delimiter = ',')
         for row in terms_reader:
             organizations.append(row[0])

@@ -16,7 +16,7 @@ NEWSPIDER_MODULE = 'tutorial.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'
+USER_AGENT = 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'
 
 
 # Obey robots.txt rules
@@ -93,7 +93,7 @@ DELTAFETCH_ENABLED = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-
+DOWNLOAD_TIMEOUT = 15
 REDIRECT_ENABLED = False
 RETRY_ENABLED = False
 #sLOG_LEVEL = 'INFO'
@@ -105,5 +105,5 @@ RETRY_ENABLED = False
 #SCHEDULER_DISK_QUEUE = 'queues.DiskQueue'
 #SCHEDULER = 'domain_scheduler.DomainScheduler'
 FEED_FORMAT="CSV"
-FEED_URI="sample_output.csv"
+FEED_URI="/Users/Alex/Desktop/HezbollahScrapper/sample_output.csv"
 COMMANDS_MODULE = 'tutorial.commands'
